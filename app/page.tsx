@@ -2,6 +2,55 @@
 
 import { useState } from "react";
 import { useForm } from "react-hook-form";
+import { redirect } from "next/navigation";
+
+
+/* 
+# Prisma
+1. Node.js and Typescript ORM(Object Relational Mapping)
+=> JS or TS 와 데이터베이스 사이에 다리를 놓아줌 (기본적으로 번역기의 역할을 한다고 생각하면 됨)
+
+2. Prisma를 사용하기 위해서는 먼저 Prisma에게 DB가 어떻게 생겼는지, 데이터의 모양을 설명해줘야 함 => schema.prisma
+
+3. Prisma가 이런 타입에 관한 정보를 알고 있으면 client를 생성해줄 수 있음. client를 이용하면 TS로 DB와 직접 상호작용 가능, 자동완성 제공.
+
+4. Prisma Studio : Visual Database Browser, DB를 위한 관리자 패널같은 것.
+
+
+#PlanetScale
+MySQL과 호환(Compatible)되는 serverless 데이터베이스 플랫폼
+https://planetscale.com/
+
+1. brew install planetscale/tap/pscale
+2. brew install mysql-client
+
+
+
+scaling을 자동으로 해줌 ( + no vacumming, no rebalencing, no query planning, no downtime)
+
+Vitess 오픈소스를 통해 MySQL Scaling
+
+CLI를 통해 쉽게 데이터베이스를 다룰 수 있음
+
+마치 Git처럼 메인 데이터베이스 이외에 Branch 데이터베이스를 사용할 수도 있음
+
+이후 Merge를 하면 자동으로 배포가 됨
+
+Vitess
+Vitess는 MySQL을 스케일링하기 위한 데이터베이스 클러스터링 시스템
+인터넷에서 가장 큰 사이트를 호스팅하는 강력한 오픈 소스 기술입니다.
+https://vitess.io/
+
+Vitess를 사용하는 이유
+1. 수평 스케일
+2. 고가용성 (Vitess의 기본 복제본 구성은 예기치 않은 이벤트가 발생할 때 기본에서 복제본으로 원활한 장애 조치를 허용합니다.)
+3. MySQL 호환
+4. 쿠버네티스 네이티브
+5. 구체화된 뷰
+6. 온라인 스키마 마이그레이션
+
+*/
+
 
 
 type FormValues = {
@@ -19,6 +68,7 @@ export default function Home() {
   const { register,handleSubmit,formState : {errors} ,setValue}  = useForm<FormValues>();
   const onValid = (data: FormValues) => { setFinalValues(data) };
   const onInvalid = (data: any) => { console.log(data)};
+  
 
   return (
     <div className="overflow-hidden flex justify-center my-6">
